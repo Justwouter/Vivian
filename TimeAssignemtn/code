@@ -1,0 +1,141 @@
+import java.util.Scanner;
+
+public class TimeCalculations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Select a mode: conversion or comparison");
+        String mode = scanner.nextLine();
+
+        if (mode.equals("conversion")) {
+            System.out.println("Please input the format of time:");
+            String formatOfTime = scanner.nextLine();
+
+            int days;
+            int hours;
+            int minutes;
+            int seconds;
+
+            if (formatOfTime.equals("hours")) {
+                System.out.println("Please input the number of hours spent:");
+                hours = scanner.nextInt();
+
+                days = hours / 24;
+                hours = hours - (days * 24);
+
+                System.out.println("The time spend is:");
+                System.out.println(days + " days, " + hours + " hours");
+
+            } else if (formatOfTime.equals("minutes")) {
+                System.out.println("Please input the number of minutes spent:");
+                minutes = scanner.nextInt();
+
+                hours = minutes / 60;
+                days = hours / 24;
+
+                hours = hours - (days * 24);
+                minutes = minutes - (days * 1440) - (hours * 60);
+
+                System.out.println("The time spend is:");
+                System.out.println(days + " days, " + hours + " hours, " + minutes + " minutes");
+
+            } else if (formatOfTime.equals("seconds")) {
+                System.out.println("Please input the number of seconds spent:");
+                seconds = scanner.nextInt();
+
+                minutes = seconds / 60;
+                hours = minutes / 60;
+                days = hours / 24;
+
+                hours = hours - (days * 24);
+                minutes = minutes - (days * 1440) - (hours * 60);
+                seconds = seconds - (days * 86400) - (hours * 3600) - (minutes * 60);
+
+                System.out.println("The time spend is:");
+                System.out.println(days + " days, " + hours + " hours," + minutes + " minutes, " + seconds + " seconds");
+            }
+
+        } else if (mode.equals("comparison")) {
+            System.out.println("Please input the format of the first time:");
+            String formatOfFirstTime = scanner.nextLine();
+
+            int numberOfMinutes;
+            int numberOfHours;
+            int secondsFirst = 0;
+            int secondsSecond = 0;
+
+            if (formatOfFirstTime.equals("hours")) {
+                System.out.println("Please input the number of hours spent:");
+                numberOfHours = scanner.nextInt();
+                scanner.nextLine();
+
+                secondsFirst = numberOfHours * 3600;
+
+                System.out.println("Please input the format of the second time:");
+                String formatOfSecondTime = scanner.nextLine();
+
+                if (formatOfSecondTime.equals("minutes")) {
+                    System.out.println("Please input the number of minutes spent:");
+                    numberOfMinutes = scanner.nextInt();
+
+                    secondsSecond = numberOfMinutes * 60;
+
+                } else if (formatOfSecondTime.equals("seconds")) {
+                    System.out.println("Please input the number of seconds spent:");
+                    secondsSecond = scanner.nextInt();
+                }
+
+            } else if (formatOfFirstTime.equals("minutes")) {
+                System.out.println("Please input the number of minutes spent:");
+                numberOfMinutes = scanner.nextInt();
+                scanner.nextLine();
+
+                secondsFirst = numberOfMinutes * 60;
+
+                System.out.println("Please input the format of the second time");
+                String formatOfSecondTime = scanner.nextLine();
+
+                if (formatOfSecondTime.equals("hours")) {
+                    System.out.println("Please input the number of hours spent");
+                    numberOfHours = scanner.nextInt();
+
+                    secondsSecond = numberOfHours * 3600;
+
+                } else if (formatOfSecondTime.equals("seconds")) {
+                    System.out.println("Please input the number of seconds spent");
+                    secondsSecond = scanner.nextInt();
+                }
+
+            } else if (formatOfFirstTime.equals("seconds")) {
+                System.out.println("Please input the number of seconds spent:");
+                secondsSecond = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.println("Please input the format of the second time");
+                String formatOfSecondTime = scanner.nextLine();
+
+                if (formatOfSecondTime.equals("hours")) {
+                    System.out.println("Please input the number of hours spent");
+                    numberOfHours = scanner.nextInt();
+
+                    secondsSecond = numberOfHours * 3600;
+                } else if (formatOfSecondTime.equals("minutes")) {
+                    System.out.println("Please input the number of minutes spent:");
+                    numberOfMinutes = scanner.nextInt();
+
+                    secondsSecond = numberOfMinutes * 60;
+                }
+            }
+            scanner.close();
+
+            if (secondsFirst > secondsSecond) {
+                System.out.println("The first time is larger.");
+            } else if (secondsFirst < secondsSecond) {
+                System.out.println("The second time is larger.");
+            } else {
+                System.out.println("Both times are equally large");
+            }
+
+        }
+    }
+}
